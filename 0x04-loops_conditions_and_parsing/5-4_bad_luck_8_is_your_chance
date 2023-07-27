@@ -1,4 +1,6 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+#  Bash script that loops from 1 to 10 and: displaying something
+
 count=1
 while [ $count -le 10 ]
 do
