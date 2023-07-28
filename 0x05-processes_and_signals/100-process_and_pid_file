@@ -6,10 +6,15 @@ function ex() {
 	exit
 }
 
+#hundle sigterm
 trap "echo I hate the kill command;ex" SIGTERM
+
+#hundle sigint
 trap "echo Y U no love me?!;ex" SIGINT
 
 echo $$ >> /var/run/myscript.pid
+
+#print till infinity
 while [ true ]; do
 	echo To infinity and beyond;
 done
