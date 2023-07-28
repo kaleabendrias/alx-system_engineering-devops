@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # long func that prints and prevents killing it
 
+pid_file="/var/run/myscript.pid"
+
 # removes then exits func
 function ex() {
-	rm /var/run/myscript.pid
-	exit
+	rm -f "$pid_file"
+	exit 0
 }
 
 #hundle sigterm
@@ -16,7 +18,7 @@ trap "echo Y U no love me?!;ex" SIGINT
 #hundles sigquit
 trap "exit" SIGQUIT
 
-echo $$ >> /var/run/myscript.pid
+echo $$ > "$pid_file"
 
 #print till infinity
 while [ true ]; do
