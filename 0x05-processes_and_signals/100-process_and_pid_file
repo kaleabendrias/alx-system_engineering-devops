@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # long func that prints and prevents killing it
 
+# removes then exits func
 function ex() {
 	rm /var/run/myscript.pid
 	exit
