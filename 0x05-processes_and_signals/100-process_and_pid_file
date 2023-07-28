@@ -17,7 +17,7 @@ trap "echo I hate the kill command;ex" SIGTERM
 trap "echo Y U no love me?!;ex" SIGINT
 
 #hundles sigquit
-trap "exit" SIGQUIT
+trap "ex" SIGQUIT
 
 echo $$ > "$pid_file"
 
