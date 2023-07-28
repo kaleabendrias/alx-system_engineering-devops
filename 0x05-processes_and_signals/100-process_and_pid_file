@@ -13,6 +13,9 @@ trap "echo I hate the kill command;ex" SIGTERM
 #hundle sigint
 trap "echo Y U no love me?!;ex" SIGINT
 
+#hundles sigquit
+trap "exit" SIGQUIT
+
 echo $$ >> /var/run/myscript.pid
 
 #print till infinity
