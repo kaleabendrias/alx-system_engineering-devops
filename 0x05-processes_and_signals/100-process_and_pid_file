@@ -4,7 +4,8 @@
 pid_file="/var/run/myscript.pid"
 
 # removes then exits func
-function ex() {
+function ex()
+{
 	rm -f "$pid_file"
 	exit 0
 }
