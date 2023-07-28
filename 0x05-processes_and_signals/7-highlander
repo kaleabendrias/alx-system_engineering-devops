@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# displays to infinity with sleep
+
+trap 'echo "I am invincible!!!"' 15
+while true; do
+	echo "to infinity and beyond"
+	sleep 2
+done
