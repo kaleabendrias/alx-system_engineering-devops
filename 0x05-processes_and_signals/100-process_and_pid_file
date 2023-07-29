@@ -22,6 +22,6 @@ trap "ex" SIGQUIT
 echo $$ > "$pid_file"
 
 #print till infinity
-while [ true ]; do
+while true; do
 	echo To infinity and beyond;
 done
