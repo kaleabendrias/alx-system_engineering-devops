@@ -2,13 +2,13 @@
 # displays the time for 12 hours and 59 minutes:
 
 i=0
-j=0
-while [ $i -ne 13 ]; do
+while [ $i -le 12 ]; do
 	echo "Hour: $i"
-	i=$((i+1))
-	while [ $j -ne 60 ]; do
-		echo $j
-		j=$((j+1))
-	done
 	j=1
+	i=$((i+1))
+	while [ $j -le 59 ]; do
+		echo $j
+		(( j++ ))
+	done
+	(( i++ ))
 done
