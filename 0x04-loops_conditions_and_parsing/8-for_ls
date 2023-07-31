@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
-# loop through the files
+# loop throgh
 
-for file in *
-do
-	#check if the file is hidden
-	if [ ! -d "$file" ] && [[ "$file" == *-* ]]
-	then
-		new_name="${file#*-}"
-		echo "$new_name"
-	fi
+l=$(ls)
+for i in $l; do
+	echo "$i" | cut -d '-' -f2
 done
