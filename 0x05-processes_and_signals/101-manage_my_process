@@ -9,14 +9,8 @@ start_process() {
 
 #function to stop proc
 stop_process() {
-	if [ -f "/var/run/my_process.pid" ]; then
-		pid=$(cat /var/run/my_process.pid)
-		kill "$pid"
-		rm -f /var/run/my_process.pid
-		echo "manage_my_process stopped"
-	else
-		echo "manage_my_process stopped"
-	fi
+	[ -e "/var/run/my_process.pid" ] && pkill -f "./manage_my_process" && rm /var/run/my_process.pid
+	echo "manage_my_process stopped"
 }
 
 #restart process
