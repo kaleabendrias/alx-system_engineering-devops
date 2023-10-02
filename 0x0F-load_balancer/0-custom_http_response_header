@@ -19,6 +19,8 @@ sed -i "/listen 80 default_server;/a $custom_redirect" "$config_file"
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
 sed -i "/listen 80 default_server;/a $custom_404" "$config_file"
 
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+
 service nginx restart
 
 # Exit
