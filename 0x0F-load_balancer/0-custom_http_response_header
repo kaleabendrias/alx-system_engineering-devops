@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Update the package manager
+
+apt-get -y update
+
+if ! [ -x "$(command -v nginx)" ]; then
+    apt-get -y install nginx
+fi
+
+config_file="/etc/nginx/sites-available/default"
+custom_header="add_header X-Served-By \$HOSTNAME;"
+custom_redirect="rewrite ^/redirect_me https://www.youtube.com permanent;"
+custom_404="error_page 404 /custom_404.html;"
+
+sed -i "/listen 80 default_server;/a $custom_header" "$config_file"
+
+sed -i "/listen 80 default_server;/a $custom_redirect" "$config_file"
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+sed -i "/listen 80 default_server;/a $custom_404" "$config_file"
+
+service nginx restart
+
+# Exit
+exit 0
