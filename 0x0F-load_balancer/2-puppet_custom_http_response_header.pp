@@ -16,7 +16,7 @@ service { 'nginx':
 file { '/etc/nginx/sites-available/default':
     ensure => 'present',
     path   => '/etc/nginx/sites-available/default',
-    match => 'listen 80 default_server',
+    after  => "^\tlocation / {",
     line  => "\n\tadd_header X-Served-By \"${hostname}\";",
 }
 
