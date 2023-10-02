@@ -8,11 +8,12 @@ package {'nginx':
   ensure => 'installed',
 }
 
-file_line { 'http_header':
-  path  => /etc/nginx/sites-enabled/default,
-  after => 'listen 80 default_server',
-  line  => "add_header X-Served-By \"${::hostname}\";",
-  notify => Exec['run'],
+-> file_line { 'header line':
+  ensure => present,
+  path   => '/etc/nginx/sites-available/default',
+  line   => "	location / {
+  add_header X-Served-By ${hostname};",
+  match  => '^\tlocation / {',
 }
 
 exec {'run':
