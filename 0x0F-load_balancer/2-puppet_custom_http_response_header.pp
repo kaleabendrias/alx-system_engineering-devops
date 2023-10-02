@@ -18,6 +18,7 @@ file { '/etc/nginx/sites-available/default':
     line  => "\n\tadd_header X-Served-By \"${HOSTNAME}\";",
 }
 
-service { 'nginx':
-  ensure => true,
+exec { 'restart service':
+    command  => 'sudo service nginx restart',
+    provider => shell,
 }
