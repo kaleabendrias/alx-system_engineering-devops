@@ -10,8 +10,8 @@ frontend_config+="\n\tdefault_backend servers"
 
 backend_config="backend servers"
 backend_config+="\n\tbalance roundrobin"
-backend_config+="\n\tserver 323213-web-01-web-01 35.175.126.161:80 check"
-backend_config+="\n\tserver 323213-web-02-web-02 54.164.52.24:80 check"
+backend_config+="\n\tserver 323213-web-01 35.175.126.161:80 check"
+backend_config+="\n\tserver 323213-web-02 54.164.52.24:80 check"
 
 haproxy_config="/etc/haproxy/haproxy.cfg"
 
