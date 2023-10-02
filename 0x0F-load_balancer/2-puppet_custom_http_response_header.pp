@@ -1,5 +1,7 @@
 # automate the task of creating a custom HTTP header response
 
+$hostname = $::hostname
+
 exec {'apt-update':
     command => '/usr/bin/apt-get update',
 }
@@ -15,7 +17,7 @@ file { '/etc/nginx/sites-available/default':
     ensure => 'present',
     path   => '/etc/nginx/sites-available/default',
     match => 'listen 80 default_server',
-    line   => "\tadd_header X-Served-By \"${::hostname}\";",
+    line  => "\n\tadd_header X-Served-By \"${hostname}\";",
 }
 
 exec { 'restart service':
