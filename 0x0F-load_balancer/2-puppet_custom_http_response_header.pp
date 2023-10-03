@@ -1,4 +1,4 @@
-# instal and configure nginx
+# install and configure nginx
 exec { 'update':
   command     => 'sudo apt-get -y update',
   provider => shell,
@@ -10,7 +10,7 @@ exec { 'update':
 }
 
 -> exec { 'replace':
-  command => 'sudo sed -i "/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default',
+  command => 'sudo sed -i "/server {/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default',
   provider => shell,
 }
 
