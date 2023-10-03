@@ -1,4 +1,4 @@
-# install and configure nginx
+#  automate the task of creating a custom HTTP header response
 exec { 'update':
   command     => 'sudo apt-get -y update',
   provider => shell,
