@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Check if configuration is correct
+
+# Function to query DNS and display information
+query_dns() {
+    local subdomain="$1"
+    local domain="$2"
+    local result="$3"
+
+    local record_type=$(awk '/IN/ {print $4}' <<< "$result")
+    echo "The subdomain $subdomain is a $record_type record and points to $result"
+}
+
+# Main script
+main() {
+    local domain="$1"
+    local subdomain="$2"
+
+    # Default subdomains to query
+    local subdomains=("www" "lb-01" "web-01" "web-02")
+
+    # If a subdomain is provided as an argument, query only that subdomain
+    if [ -n "$subdomain" ]; then
+        subdomains=("$subdomain")
+    fi
+
+    for subdomain in "${subdomains[@]}"; do
+        local result=$(dig +short "$subdomain.$domain")
+
+        if [ -n "$result" ]; then
+            query_dns "$subdomain" "$domain" "$result"
+        fi
+    done
+}
+
+# Check for the correct number of arguments
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+# Call the main function with provided arguments
+main "$@"
