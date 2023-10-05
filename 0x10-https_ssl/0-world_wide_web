@@ -3,6 +3,7 @@
 
 query_dns() {
     local subdomain="$1"
+    local domain="$2"
     local record_type="$3"
     local destination="$4"
 
