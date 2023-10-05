@@ -42,5 +42,3 @@ backend servers
         balance roundrobin
         server 323213-web-01 35.175.126.161:80 check
         server 323213-web-02 54.164.52.24:80 check
-bind *:443 ssl crt /etc/haproxy/certs/www.siteninja.tech.pem
-redirect scheme https if !{ ssl_fc }
