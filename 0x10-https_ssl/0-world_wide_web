@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
-# Check if configuration is correct
+# check if configuration is correct
 
-# Function to query DNS and display information
 query_dns() {
     local subdomain="$1"
     local domain="$2"
-    local result="$3"
+    local record_type="$3"
+    local destination="$4"
 
-    local record_type=$(awk '/IN/ {print $4}' <<< "$result")
-    echo "The subdomain $subdomain is a $record_type record and points to $result"
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
 # Main script
@@ -17,7 +16,7 @@ main() {
     local subdomain="$2"
 
     # Default subdomains to query
-    local subdomains=("www" "lb-01" "web-01" "web-02")
+    subdomains=("www" "lb-01" "web-01" "web-02")
 
     # If a subdomain is provided as an argument, query only that subdomain
     if [ -n "$subdomain" ]; then
@@ -25,10 +24,11 @@ main() {
     fi
 
     for subdomain in "${subdomains[@]}"; do
-        local result=$(dig +short "$subdomain.$domain")
+        result=$(dig "$subdomain.$domain" +short)
 
         if [ -n "$result" ]; then
-            query_dns "$subdomain" "$domain" "$result"
+            record_type=$(dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | awk '/IN/ {print $4}')
+            query_dns "$subdomain" "$domain" "$record_type" "$result"
         fi
     done
 }
