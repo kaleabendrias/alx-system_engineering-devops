@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     todos = todos_response.json()
 
-    with open(f"{employee_id}.csv", mode='w') as file:
+    with open("{}.csv".format(employee_id), mode='w') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for task in todos:
             writer.writerow([employee_id, employee_name,
