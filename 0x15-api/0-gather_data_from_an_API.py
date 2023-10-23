@@ -11,7 +11,7 @@ if __name__ == "__main__":
     todos_response = requests.get("{}/todos?userId={}"
                                   .format(url, employee_id))
 
-    employee_name = user_response.json().get('name')
+    EMPLOYEE_NAME = user_response.json().get('name')
     todos = todos_response.json()
 
     total_tasks = len(todos)
@@ -19,6 +19,6 @@ if __name__ == "__main__":
     num_done_tasks = len(done_tasks)
 
     print("Employee {} is done with tasks(\
-{}/{}):".format(employee_name, num_done_tasks, total_tasks))
+{}/{}):".format(EMPLOYEE_NAME, num_done_tasks, total_tasks))
     for task in done_tasks:
         print("\t{}".format(task['title']))
