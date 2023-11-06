@@ -1,4 +1,4 @@
-# onfiguring your server with Puppet
+# configuring your server with Puppet
 package {'nginx':
   ensure => 'present',
 }
