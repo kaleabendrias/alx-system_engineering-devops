@@ -21,9 +21,6 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count_dict={}):
 
     for child in children:
         hot_list.append(child.get('data').get('title'))
-    
-    
-
     for title in hot_list:
         words = title.lower().split()
         for word in words:
