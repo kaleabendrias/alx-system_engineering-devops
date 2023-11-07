@@ -5,13 +5,17 @@ import requests
 
 def top_ten(subreddit):
     """function that queries the Reddit API and prints the titles"""
-    try:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-        headers = {"User-Agent": "Mozilla/5.0"}
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        data = response.json()
-        for post in data['data']['children'][:10]:
-            print(post['data']['title'])
-    except Exception:
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    headers = {'User-Agent': 'My User Agent 1.0'}
+
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
+    if response.status_code == 200:
+        data = response.json().get('data')
+        children = data.get('children')
+
+        for i in range(10):
+            print(children[i].get('data').get('title'))
+    else:
         print(None)
+        return
