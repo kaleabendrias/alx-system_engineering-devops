@@ -21,9 +21,8 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count_dict={}):
 
     for child in children:
         hot_list.append(child.get('data').get('title'))
-
-    if after is not None:
-        count_words(subreddit, word_list, hot_list, after, count_dict)
+    
+    
 
     for title in hot_list:
         words = title.lower().split()
@@ -33,10 +32,12 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count_dict={}):
                     count_dict[word] += 1
                 else:
                     count_dict[word] = 1
-
-    sorted_list = sorted(count_dict.items(), key=lambda x: (-x[1], x[0]))
-    last_occurrence = {}
-    for item in sorted_list:
-        last_occurrence[item[0]] = item[1]
-    for key, value in last_occurrence.items():
-        print(f"{key}: {value}")
+    if after is not None:
+        count_words(subreddit, word_list, hot_list, after, count_dict)
+    else:
+        sorted_list = sorted(count_dict.items(), key=lambda x: (-x[1], x[0]))
+        last_occurrence = {}
+        for item in sorted_list:
+            last_occurrence[item[0]] = item[1]
+        for key, value in last_occurrence.items():
+            print(f"{key}: {value}")
