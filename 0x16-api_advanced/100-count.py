@@ -36,7 +36,7 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count_dict={}):
 
     sorted_list = sorted(count_dict.items(), key=lambda x: (-x[1], x[0]))
     last_occurrence = {}
-    for key, value in count_dict.items():
-        last_occurrence[key] = value
+    for item in sorted_list:
+        last_occurrence[item[0]] = item[1]
     for key, value in last_occurrence.items():
         print(f"{key}: {value}")
