@@ -6,7 +6,7 @@ exec {
 }
 
 exec {
-    'replace the hard limit',
+    'replace the soft limit',
     command => sed -i "s/holberton soft nofile 4/ holberton hard nofile 1000" /etc/security/limits.conf,
     path    => ['/bin/','/usr/bin/']
 }
