@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # script to gracefully kill gunicorn
-PID=$(ps -aux | grep gunicorn | head -n 1)
+PID=$(ps -aux | grep gunicorn | head -n 1 | awk '{print $2}')
 kill -HUP "$PID"
 
