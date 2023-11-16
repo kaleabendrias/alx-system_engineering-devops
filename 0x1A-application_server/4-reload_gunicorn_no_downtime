@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # script to gracefully kill gunicorn
-ps -auxf | grep gunicorn | head -n 1 | awk '{ print $2 }' | xargs kill -TERM
+kill -HUP `ps -aux | grep gunicorn | head -n 1 | awk '{print $2}'`
 
