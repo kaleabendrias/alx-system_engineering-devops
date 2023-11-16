@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # script to gracefully kill gunicorn
-# Get the process IDs of all Gunicorn processes excluding the grep command
-pids=$(ps aux | grep gunicorn | grep -v grep | awk '{print $2}')
-
-if [ -n "$pids" ]; then
-    for pid in $pids; do
-        kill -HUP "$pid"
-    done
-else
-    echo "No Gunicorn processes found."
-fi
+PID=$(ps -aux | grep gunicorn | head -n 1 | awk '{print $2}')
+kill -HUP "$PID"
 
